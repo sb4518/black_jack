@@ -91,4 +91,15 @@ void print(){
 	}
 }
 
+//prints the dealer's hand 
+void dealerprint(){
+	string rank[13] = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
+	string suit[4] = {"Spades","Hearts","Clubs","Diamonds"};
+	string DealCard = "";
+	cout<<"Dealer's hand : "<<endl;
+	for(int i=0;i<dlastcard;i++){
+		DealCard = rank[dealhand[i]%13] + " Of " + suit[dealhand[i]/13];
+		cout<<"\t "<<DealCard<<endl;
+	}
+}
 
