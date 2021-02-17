@@ -25,6 +25,59 @@ int main(){
 	bool end = false;   //so it doesn't end
 	shuffle();  //shuffles the cards
 	deal();  //deals out 2 cards
+	while(end == false){
+		char act = ' ';
+		print();
+		P1tot = score(p1hand,plastcard);
+		cout<<"\t Player's current score : "<<P1tot<<endl;
+		while(act != 'h' && act != 's' && act != 'q'){
+			cout<<"h = Hit, s = Stand, q = Quit : ";  //allows the player to choose an action
+			cin>>act;
+		}
+		if(act == 'h'){  //'hits'
+			do{
+			temp = rand()%52;
+			p1hand[plastcard] = temp;
+			}while(deck[temp] == false);
+			plastcard++;
+			P1tot = score(p1hand,plastcard);
+			cout<<"Player's new score : "<<P1tot<<endl;
+		}
+		if(P1tot > 21){
+				cout<<"Player1 bust!"<<endl;
+				end = true;
+			}
+		else if(act == 's'){ // stand
+			while(score(dealhand,dlastcard) < 17){
+				do{
+				temp = rand()%52;
+				dealhand[dlastcard] = temp;
+				}while(deck[temp] == false);
+				dlastcard++;
+			}
+			Dealtot = score(dealhand,dlastcard);
+			cout<<"\t Dealer's score : "<<Dealtot<<endl;
+			dealerprint();
+			if(Dealtot > 21){
+			end = true;
+			cout<<"Dealer busts! P1 wins."<<endl;
+			}
+			else if(P1tot > Dealtot && P1tot <= 21){
+				cout<<"Player 1 wins!"<<endl;
+				end = true;
+			}
+			else if(Dealtot > P1tot && Dealtot <= 21){
+				cout<<"Dealer wins!"<<endl;
+				end = true;
+			}
+			else if(Dealtot == P1tot){
+				cout<<"Its a tie!"<<endl;
+				end = true;
+			}
+		}
+		else if(act == 'q')  //quit
+			end = true;
+		}
     
 
 
